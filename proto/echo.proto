@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package echopb;
+
+import "google/protobuf/duration.proto";
+
+service Echo {
+  rpc Echo (EchoRequest) returns (EchoResponse) {}
+}
+
+enum ServerAction {
+  UNSPECIFIED = 0;
+  RETURN_CONTEXT_DEADLINE_EXCEEDED = 1;
+  RETURN_CONTEXT_CANCELED = 2;
+}
+
+message EchoRequest {
+  string input = 1;
+  google.protobuf.Duration server_sleep = 2;
+  ServerAction action = 3;
+}
+
+message EchoResponse {
+  string output = 1;
+}
